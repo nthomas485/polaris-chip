@@ -54,7 +54,7 @@ div.card{
 
 div.charmander{
   position: relative;
-  background: //linear-gradient(#ffbfba, #ff978f, #ff756b, #ff594c, #ff756b, #ff978f);
+  // background: linear-gradient(#ffbfba, #ff978f, #ff756b, #ff594c, #ff756b, #ff978f);
   width: 310px;
   height: 480px;
   margin: 0px;
