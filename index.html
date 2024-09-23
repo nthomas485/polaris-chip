@@ -16,6 +16,7 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
     polaris-chip {
       margin: 16px;
     }
@@ -26,13 +27,41 @@
 <body>
   <h1>polaris-chip</h1>
   <!-- this is going to do whatever the tag's defaults are -->
-  <polaris-chip title="News of Record" link="https://psu.edu/"></polaris-chip>
-  <polaris-chip title="Faculty and Staff"></polaris-chip>
+  <polaris-chip title="News of Record" link="https://psu.edu/" shiny></polaris-chip>
+  <polaris-chip title="Faculty and Staff" link="https://hax.psu.edu"></polaris-chip>
   <polaris-chip title="Sports are the only thing that matter"></polaris-chip>
   <polaris-chip title="Grants and donations"></polaris-chip>
 
   <h1>my-card</h1>
   <my-card></my-card>
+  <my-card 
+  name="Pikachu" 
+  move1="Electric ball" 
+  move2="Shock" 
+  moveDamage1="30" 
+  moveDamage2="20" 
+  image="https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/07/04/12/pokemon2.jpg?quality=75&width=1250&crop=3%3A2%2Csmart&auto=webp"></my-card>
+  <my-card 
+  name="Squirtle" 
+  move1="Water Gun" 
+  move2="Bubble" 
+  moveDamage1="20"
+  moveDamage2="10" 
+  image="https://art.ngfiles.com/images/2871000/2871373_volmise_redraw-base-set-squirtle.png?f1669008079"></my-card>
+  <my-card 
+  name="Bulbasaur" 
+  move1="Vine Whip" 
+  move2="Razor Leaf" 
+  moveDamage1="20" 
+  moveDamage2="10" 
+  image="https://cdn.dribbble.com/users/3255667/screenshots/7188037/media/29b9829df7b2a9ccaa78e02f50246b59.png?resize=800x600&vertical=center"></my-card>
+  <my-card 
+  name="Mew" 
+  move1="Psywave" 
+  move2="Clairvoyance" 
+  moveDamage1="20"
+  moveDamage2="" 
+  image="https://i.pinimg.com/736x/1a/f5/6a/1af56adcdbdf561aa72c731b7b8e4b13.jpg"></my-card>
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
