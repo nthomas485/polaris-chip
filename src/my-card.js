@@ -15,26 +15,79 @@ export class MyCard extends LitElement {
   constructor() {
     super();
     this.title = "My card";
-    this.image = "https://www.dexerto.com/cdn-cgi/image/width=1200,quality=60,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/11/15/Pokemon-TCG-Charmander.jpg";
-    this.name = "Charmander";
-    // this.background = "linear-gradient(#ffbfba,#ff978f,#ff756b,#ff594c,#ff756b,#ff978f)";
+    this.image = "";
+    this.name = "";
+    // (breaks the code) this.background = "linear-gradient(#ffbfba,#ff978f,#ff756b,#ff594c,#ff756b,#ff978f)";
     this.backgroundColor = "";
-    this.move1 = "Ember";
-    this.move2 = "Scratch";
-    this.moveDamage1 = "30";
-    this.moveDamage2 = "10";
+    this.move1 = "";
+    this.move2 = "";
+    this.moveDamage1 = "";
+    this.moveDamage2 = "";
+    this.fancy  = false;
   }
   static get styles() {
     return css`
       :host {
         display: block;
       }
+      :host([name=Charmander]){
+        .HP{
+          display: inline-block;
+          margin-left: 100px;
+        }
+        .card{
+          background: var(--my-card-charmander-background);
+        }
+      }
+      :host([name=Squirtle]) {
+        .HP{
+          display: inline-block;
+          margin-left: 160px;
+        }
+        .card {
+          background: var(--my-card-squirtle-background);
+        }
+      }
+      :host([name=Pikachu]){
+        .HP{
+          display: inline-block;
+          margin-left: 150px;
+        }
+        .card{
+          background: var(--my-card-pikachu-background);
+        }
+      }
+      :host([name=Bulbasaur]){
+        .HP{
+          display: inline-block;
+          margin-left: 130px;
+        }
+        .card{
+          background: var(--my-card-bulbasaur-background)
+        }
+      }
+      :host([name=Mew]){
+        .HP{
+          display: inline-block;
+          margin-left: 190px;
+        }
+        .card{
+          background: var(--my-card-mew-background);
+        }
+      }
+
+      :host([fancy]){
+        display: block;
+        background-color: pink;
+        border: 2px solic fuchsia;
+        box-shadow: 10px 5px 5px red;
+      }
       .squirtle button{
   background-color: #89CFF0
-}
-
-.squirtle{
-  background: linear-gradient(#d9e4ec,#adc1d1,#7d99af,#557792,#7d99af,#adc1d1);
+      }
+    
+.card{
+  background-color: var(--my-card-background);
 }
 
 .squirtle button:hover{
@@ -46,7 +99,7 @@ div.card{
   height: 100%;
   top: 0%;
   margin: 0px;
-  padding: 5px 10px 5px 10px;
+  //padding: 5px 10px 5px 10px; 
   border-radius: 10px;
   position: absolute;
   left: 0%;
@@ -54,7 +107,7 @@ div.card{
 
 div.charmander{
   position: relative;
-  // background: linear-gradient(#ffbfba, #ff978f, #ff756b, #ff594c, #ff756b, #ff978f);
+  //background: linear-gradient(#ffbfba, #ff978f, #ff756b, #ff594c, #ff756b, #ff978f);
   width: 310px;
   height: 480px;
   margin: 0px;
@@ -95,8 +148,8 @@ div.move-damage{
   background: transparent;
   text-indent: 250px;
   height: 40px;
-  margin-top: -105px;
-  font-size: 26px;
+  margin-top: -84px;
+  font-size: 20px;
     
 }
 
@@ -124,6 +177,15 @@ div.move-damage{
     display: none;
   }
 }
+  .name{
+    margin-left: 16px;
+    display: inline-block;
+  }
+  /*.HP{
+    display: inline-block;
+    margin-left: 100px;
+  }
+    */
 
     `}
 
@@ -131,13 +193,33 @@ div.move-damage{
     return html`
     <div class="charmander">
     <div class="card">
-    <h2 class="name">${this.name}</h2>
+      <h2 class="name">${this.name}</h2>
+      <slot class="HP">
+
+      </slot>
     <img class="art" src=${this.image}>
-    
       <div class="move-name">
            <br>
-      <h2> ${this.move1}</h2>
-      <h2> ${this.move2}</h2>
+     <h3> <details> 
+       <summary>
+        ${this.move1}
+         </summary> </h3>
+          <div class="description1">
+            <slot>
+
+            </slot>
+          </div>
+      </details>
+      <h3> <details> 
+        <summary> 
+        ${this.move2}
+        </summary></h3>
+        <div class="description2">
+          <slot>
+
+          </slot>
+        </div>
+      </details>
   </div>
       <div class="move-damage"> 
         <p> ${this.moveDamage1} </p>
@@ -145,7 +227,7 @@ div.move-damage{
   </div>
          <div class="button">
            <button>
-     <a href="https://nintendo.com" class="button">Details</a>
+     <a href="https://nintendo.com" target="_blank" class="button">Details</a>
      </button>
     </div>
   </div>
@@ -165,6 +247,7 @@ div.move-damage{
       moveDamage1: { type: String },
       moveDamage2: { type: String },
       backgroundColor: { type: String },
+      fancy: { type: Boolean, reflect: true }
 
     };
   }
