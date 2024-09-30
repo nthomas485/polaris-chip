@@ -23,6 +23,8 @@ export class MyCard extends LitElement {
     this.move2 = "";
     this.moveDamage1 = "";
     this.moveDamage2 = "";
+    this.Health = "";
+    this.description2 = "";
     this.fancy  = false;
   }
   static get styles() {
@@ -31,7 +33,7 @@ export class MyCard extends LitElement {
         display: block;
       }
       :host([name=Charmander]){
-        .HP{
+        .Health{
           display: inline-block;
           margin-left: 100px;
         }
@@ -40,7 +42,7 @@ export class MyCard extends LitElement {
         }
       }
       :host([name=Squirtle]) {
-        .HP{
+        .Health{
           display: inline-block;
           margin-left: 160px;
         }
@@ -49,7 +51,7 @@ export class MyCard extends LitElement {
         }
       }
       :host([name=Pikachu]){
-        .HP{
+        .Health{
           display: inline-block;
           margin-left: 150px;
         }
@@ -58,7 +60,7 @@ export class MyCard extends LitElement {
         }
       }
       :host([name=Bulbasaur]){
-        .HP{
+        .Health{
           display: inline-block;
           margin-left: 130px;
         }
@@ -67,7 +69,7 @@ export class MyCard extends LitElement {
         }
       }
       :host([name=Mew]){
-        .HP{
+        .Health{
           display: inline-block;
           margin-left: 190px;
         }
@@ -79,7 +81,7 @@ export class MyCard extends LitElement {
       :host([fancy]){
         display: block;
         background-color: pink;
-        border: 2px solic fuchsia;
+        border: 2px solid fuchsia;
         box-shadow: 10px 5px 5px red;
       }
       .squirtle button{
@@ -133,10 +135,11 @@ button {
   background-color: orange;
   text-align: center;
   margin: 70px 0px 5px 85px;
+  margin-left: 100px;
 }
 
 button:hover{
-  background-color: maroon;
+  background-color: grey;
 }
 
 div.move-name {
@@ -148,9 +151,8 @@ div.move-damage{
   background: transparent;
   text-indent: 250px;
   height: 40px;
-  margin-top: -84px;
-  font-size: 20px;
-    
+  margin-top: -95px;
+  font-size: 22px;
 }
 
 @media screen and (min-width: 500px) and (max-width: 800px){
@@ -181,11 +183,35 @@ div.move-damage{
     margin-left: 16px;
     display: inline-block;
   }
-  /*.HP{
-    display: inline-block;
-    margin-left: 100px;
+
+  details summary {
+    text-align: left;
+    font-size: 20px;
+    padding: 8px 0;
   }
-    */
+
+  details[open] summary {
+    font-weight: bold;
+  }
+  
+  details div {
+    border: 2px solid black;
+    text-align: left;
+    padding: 8px;
+    height: 70px;
+    overflow: auto;
+  }
+
+  //idk why these dont work??
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
+  }
 
     `}
 
@@ -194,32 +220,30 @@ div.move-damage{
     <div class="charmander">
     <div class="card">
       <h2 class="name">${this.name}</h2>
-      <slot class="HP">
-
-      </slot>
+      <div class="Health">
+       <h4>${this.Health}</h4>
+  </div>
     <img class="art" src=${this.image}>
       <div class="move-name">
            <br>
-     <h3> <details> 
+     <details ?open="${this.fancy}" @toggle="${this.openChanged}"> 
        <summary>
         ${this.move1}
-         </summary> </h3>
+         </summary> <slot> </slot> 
           <div class="description1">
-            <slot>
-
-            </slot>
+          
           </div>
       </details>
-      <h3> <details> 
-        <summary> 
+       <details ?open="${this.fancy}" @toggle="${this.openChanged}"> 
+      <summary> 
         ${this.move2}
-        </summary></h3>
+        </summary> 
         <div class="description2">
-          <slot>
-
-          </slot>
+      
         </div>
       </details>
+       
+        
   </div>
       <div class="move-damage"> 
         <p> ${this.moveDamage1} </p>
@@ -247,6 +271,8 @@ div.move-damage{
       moveDamage1: { type: String },
       moveDamage2: { type: String },
       backgroundColor: { type: String },
+      Health: { type: String},
+      description2: { type : String},
       fancy: { type: Boolean, reflect: true }
 
     };
